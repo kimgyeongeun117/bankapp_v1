@@ -26,6 +26,7 @@ public class MyRestfulExceptionHandler {
 		sb.append("<script>");
 		// 반드시 마지막에 ;을 붙여서 사용하자.
 		sb.append("alert('"+ e.getMessage() +"');");
+		// 자바스크립트 뒤로가기
 		sb.append("history.back();");
 		sb.append("</script>");
 		
