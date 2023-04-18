@@ -1,31 +1,38 @@
 package com.tenco.bank.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tenco.bank.handler.exception.CustomPageException;
 import com.tenco.bank.handler.exception.CustomRestfulException;
+import com.tenco.bank.handler.exception.UnAuthorizedException;
+import com.tenco.bank.repository.model.User;
 
 @Controller
 @RequestMapping("/account")
 public class AccountController {
 	
-	// http://localhost:8080/account/list
-	// http://localhost:8080/account/
+	@Autowired
+	private HttpSession session;
+	
 	/**
 	 * 계좌 목록 페이지
 	 * @return 목록 페이지 이동
 	 */
 	@GetMapping({"list","/"})
-	public void list() {
+	public String list() {
 		
-		// todo 예외 테스트 - 삭제 예정
-		// throw new CustomRestfulException("인증되지 않은 사용자 입니다.", HttpStatus.UNAUTHORIZED);
-		throw new CustomPageException("페이지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+		// 인증검사 처리
+		User principal = (User)session.getAttribute("principal");
+		if(principal == null) {
+			throw new UnAuthorizedException("인증이 안된 사용자 입니다.", HttpStatus.UNAUTHORIZED);
+		}
 		
-		// return "/account/list";
+		return "/account/list";
 	}
 	
 	// 출금 페이지
