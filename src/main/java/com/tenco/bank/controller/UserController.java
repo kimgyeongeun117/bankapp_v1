@@ -100,6 +100,8 @@ public class UserController {
 		principal.setPassword(null);
 		session.setAttribute(Define.PRINCIPAL, principal);
 		// todo 변경 예정
+		
+		
 		return "redirect:/account/list";
 	}
 	
