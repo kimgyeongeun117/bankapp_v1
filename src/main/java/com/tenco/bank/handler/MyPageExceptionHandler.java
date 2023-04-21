@@ -17,7 +17,6 @@ import com.tenco.bank.handler.exception.CustomPageException;
 @ControllerAdvice
 public class MyPageExceptionHandler {
 	
-	
 	// 사용자 정의 클래스 활용
 	@ExceptionHandler(CustomPageException.class)
 	public ModelAndView handleRuntimePageException(CustomPageException e) {

@@ -11,6 +11,7 @@ import com.tenco.bank.dto.DepositeFormDto;
 import com.tenco.bank.dto.SaveFormDto;
 import com.tenco.bank.dto.TransferFormDto;
 import com.tenco.bank.dto.WithdrawFormDto;
+import com.tenco.bank.dto.response.HistoryDto;
 import com.tenco.bank.handler.exception.CustomRestfulException;
 import com.tenco.bank.repository.interfaces.AccountRepository;
 import com.tenco.bank.repository.interfaces.HistoryRepository;
@@ -46,6 +47,17 @@ public class AccountService {
 		}
 
 	}
+	
+	// 단일 계좌 검색 기능
+	public Account readAccount(Integer id) {
+		
+		Account accountEntity = accountRepository.findById(id);
+		if(accountEntity==null) {
+			throw new CustomRestfulException("해당 계좌를 찾을 수 없습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return accountEntity;
+	}
+	
 
 	// 계좌 목록 보기 기능
 	@Transactional
@@ -181,4 +193,18 @@ public class AccountService {
 		
 	}
 	
+	/**
+	 * 거래내역 검색
+	 * @param type - [all, deposite, withdraw]
+	 * @param id (account_id)
+	 * @return 입금,출금,입출금 거래내역 (3가지 타입)
+	 */
+	public List<HistoryDto> readHistoryListByAccount(String type,Integer id){
+		
+		List<HistoryDto> historyDtos = historyRepository.findByIdHistoryType(type, id);
+		
+		
+		
+		return historyDtos;
+	}
 }
