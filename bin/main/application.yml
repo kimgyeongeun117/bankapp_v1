@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+      
+      
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://localhost:3306/bank2?serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+#  sql: 
+#    init:
+#      schema-locations:
+#      - classpath:db/table.sql
+#      data-locations:
+#      - classpath:db/data.sql
+      
+    
+#  h2:
+#    console:
+#      enabled: true
+#  output:
+#    ansi: 
+#      enabled: always
+      
+      
+mybatis:
+  mapper-locations:
+  - classpath:mapper/**.xml
+  configuration:
+    map-underscore-to-camel-case: true

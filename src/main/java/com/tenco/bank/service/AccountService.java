@@ -36,6 +36,7 @@ public class AccountService {
 	@Transactional
 	public void createAccount(SaveFormDto saveFormDto, Integer principalId) {
 
+		System.out.println(saveFormDto);
 		Account account = new Account();
 		account.setNumber(saveFormDto.getNumber());
 		account.setPassword(saveFormDto.getPassword());
